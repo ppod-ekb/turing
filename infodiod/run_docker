@@ -1,0 +1,4 @@
+#!/bin/bash
+echo docker image name: $1
+echo docker container name: $2
+docker run -p $3:$4 -d --name $2 -t $1

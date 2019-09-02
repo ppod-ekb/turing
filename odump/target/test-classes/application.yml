@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: "default"
+  jackson:
+    serialization:
+      fail-on-empty-beans: true
+server:
+  port: 8080
+configuration:
+  version: "odump service test"
+  dump:
+    clientPath: "/opt/oracle/instantclient_19_3"
+    expCmd: "/opt/oracle/instantclient_19_3/exp"
+    outputPath: "/tmp/turing/odump"
+    dmpFileExtension: ".dmp"
+    logFileExtension: ".log"
+  infodiod:
+    serviceHost: "http://172.17.0.5:8080"
+    dumpCreatedAction: "/dumpCreated"
+---
+spring:
+  profiles: local-dev
+configuration:
+  infodiod:
+    serviceHost: "http://localhost:8081"

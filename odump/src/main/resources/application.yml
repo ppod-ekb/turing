@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: "default"
+  jackson:
+    serialization:
+      fail-on-empty-beans: true
+server:
+  port: 8080
+configuration:
+  version: @project.version@
+  dump:
+    clientPath: "/opt/oracle/instantclient_19_3"
+    expCmd: "/opt/oracle/instantclient_19_3/exp"
+    outputPath: "${TURING_DUMP_PVC_MOUNT_PATH}"
+    dmpFileExtension: ".dmp"
+    logFileExtension: ".log"
+  infodiod:
+    serviceHost: "${INFODIOD_SERVICE}"
+    dumpCreatedAction: "/dumpCreated"
+---
+spring:
+  profiles: local-docker
+configuration:
+  dump:
+    outputPath: "/tmp/turing/odump"
+  infodiod:
+    serviceHost: "http://172.17.0.6:8080"
+---
+spring:
+  profiles: local-dev
+configuration:
+  dump:
+    outputPath: "/tmp/turing/odump"
+  infodiod:
+    serviceHost: "http://localhost:8081"
