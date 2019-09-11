@@ -19,6 +19,11 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>ru.cbr.turing.dump.common</groupId>
+            <artifactId>common-lib</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

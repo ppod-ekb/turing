@@ -1,5 +1,6 @@
 package ru.cbr.turing.dump.oraexp;
 
+import ru.cbr.turing.dump.common.Cmd;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

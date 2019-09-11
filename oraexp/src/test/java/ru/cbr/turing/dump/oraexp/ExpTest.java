@@ -1,6 +1,6 @@
 package ru.cbr.turing.dump.oraexp;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import ru.cbr.turing.dump.common.Cmd;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

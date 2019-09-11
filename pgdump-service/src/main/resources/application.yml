@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: "default"
+  jackson:
+    serialization:
+      fail-on-empty-beans: true
+server:
+  port: 8080
+configuration:
+  version: @project.version@
+  dump:
+    pgdumpCmd: "/usr/bin/pg_dump"
+    dmpFormat: "c"
+    dmpStorageMountPath: "${TURING_DUMP_PVC_MOUNT_PATH}"
+    dmpFileExtension: ".dmp"
+    logFileExtension: ".log"
+  infodiod:
+    serviceHost: "${INFODIOD_SERVICE_HOST}"
+---
+spring:
+  profiles: local-docker
+configuration:
+  dump:
+    dmpStorageMountPath: "/tmp/turing/pgdump"
+  infodiod:
+    serviceHost: "172.17.0.9:8080"
+---
+spring:
+  profiles: local-dev
+server:
+  port: 8082
+configuration:
+  dump:
+    dmpStorageMountPath: "/tmp/turing/pgdump"
+  infodiod:
+    serviceHost: "localhost:8081"

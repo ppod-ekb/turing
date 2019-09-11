@@ -1,5 +1,7 @@
 package ru.cbr.turing.dump.oraexp;
 
+import ru.cbr.turing.dump.common.Cmd;
+
 public class Exp {
 
     private final Config config;

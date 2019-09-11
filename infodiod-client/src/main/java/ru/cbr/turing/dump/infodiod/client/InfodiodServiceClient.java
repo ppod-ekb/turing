@@ -2,31 +2,19 @@ package ru.cbr.turing.dump.infodiod.client;
 
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 public class InfodiodServiceClient {
 
-    private final String url;
+    private final String serviceHost;
     private final RestTemplate restTemplate;
+    private final DumpCreated dumpCreated;
 
-    public InfodiodServiceClient(String url) {
-        this.url = url;
+    public InfodiodServiceClient(String serviceHost) {
+        this.serviceHost = serviceHost;
         this.restTemplate = new RestTemplate();
-    }
-
-    public SendDumpByInfodiodReport dumpCreated(String orderNum) {
-        DumpCreatedResponse response = restTemplate.postForObject(url, new Order(orderNum), DumpCreatedResponse.class);
-        return response;
-    }
-
-    public SendDumpByInfodiodReport dumpCreated(Order order) {
-        DumpCreatedResponse response = restTemplate.postForObject(url,order,DumpCreatedResponse.class);
-        return response;
-    }
-
-    public interface SendDumpByInfodiodReport {
-        String getMessage();
-        List<String> getCreatedFileNames();
+        this.dumpCreated = new DumpCreated();
     }
 
     public static class Order {
@@ -49,34 +37,90 @@ public class InfodiodServiceClient {
         }
     }
 
-    public static class DumpCreatedResponse implements SendDumpByInfodiodReport {
-        private String message;
-        private List<String> createdFileNames;
+    public DumpCreated dumpCreated() {
+        return dumpCreated;
+    }
 
-        public DumpCreatedResponse() {
+    public interface SendDumpByInfodiodResponse {
+        String getMessage();
+        List<String> getCreatedFileNames();
 
+        class Empty implements SendDumpByInfodiodResponse {
+
+            private String message = "";
+
+            @Override
+            public String getMessage() {
+                return message;
+            }
+
+            @Override
+            public List<String> getCreatedFileNames() {
+                return Collections.emptyList();
+            }
         }
 
-        public DumpCreatedResponse(String message, List<String> createdFileNames) {
-            this.message = message;
-            this.createdFileNames = createdFileNames;
+        class ErrorSendDumpResponse  implements SendDumpByInfodiodResponse {
+            private final String message;
+            public ErrorSendDumpResponse(Exception e) {
+                this.message = e.toString();
+            }
+
+            @Override
+            public String getMessage() {
+                return message;
+            }
+
+            @Override
+            public List<String> getCreatedFileNames() {
+                return Collections.emptyList();
+            }
         }
 
-        public String getMessage() {
-            return message;
-        }
+        class DumpSendedResponse implements SendDumpByInfodiodResponse {
+            private String message;
+            private List<String> createdFileNames;
 
-        public void setMessage(String message) {
-            this.message = message;
-        }
+            public DumpSendedResponse() {
 
-        public List<String> getCreatedFileNames() {
-            return createdFileNames;
-        }
+            }
 
-        public void setCreatedFileNames(List<String> createdFileNames) {
-            this.createdFileNames = createdFileNames;
+            public DumpSendedResponse(String message, List<String> createdFileNames) {
+                this.message = message;
+                this.createdFileNames = createdFileNames;
+            }
+
+            public String getMessage() {
+                return message;
+            }
+
+            public void setMessage(String message) {
+                this.message = message;
+            }
+
+            public List<String> getCreatedFileNames() {
+                return createdFileNames;
+            }
+
+            public void setCreatedFileNames(List<String> createdFileNames) {
+                this.createdFileNames = createdFileNames;
+            }
         }
     }
 
+    public class DumpCreated {
+
+        private final String url = "http://" + serviceHost + "/dumpCreated";
+
+        public SendDumpByInfodiodResponse post(String orderNum) {
+            SendDumpByInfodiodResponse response = restTemplate.postForObject(url, new Order(orderNum), SendDumpByInfodiodResponse.DumpSendedResponse.class);
+            return response;
+        }
+
+        public SendDumpByInfodiodResponse post(Order order) {
+            SendDumpByInfodiodResponse response = restTemplate.postForObject(url, order, SendDumpByInfodiodResponse.DumpSendedResponse.class);
+            return response;
+        }
+
+    }
 }

@@ -4,10 +4,8 @@ ru/cbr/turing/dump/oracle/DumpController$ServiceInfo.class
 ru/cbr/turing/dump/oracle/Application$Config$Dump.class
 ru/cbr/turing/dump/oracle/DumpService.class
 ru/cbr/turing/dump/oracle/DumpService$DumpReport$DUMP_STATUS.class
-ru/cbr/turing/dump/oracle/DumpController$EmptySendToInfodiodResponse.class
 ru/cbr/turing/dump/oracle/InfodiodService.class
 ru/cbr/turing/dump/oracle/Application.class
-ru/cbr/turing/dump/oracle/DumpController$1.class
 ru/cbr/turing/dump/oracle/DumpController.class
 ru/cbr/turing/dump/oracle/DumpController$CreateAndSendToInfodiodResponse.class
 ru/cbr/turing/dump/oracle/Application$Config$Infodiod.class

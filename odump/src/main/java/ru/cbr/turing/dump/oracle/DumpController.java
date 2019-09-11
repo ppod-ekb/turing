@@ -59,23 +59,7 @@ public class DumpController {
 
             return new CreateAndSendToInfodiodResponse(dumpReport, infodiodReport);
         } else {
-            return new CreateAndSendToInfodiodResponse(dumpReport, new InfodiodService.InfodiodReport(new EmptySendToInfodiodResponse()));
-        }
-    }
-
-    private class EmptySendToInfodiodResponse implements InfodiodServiceClient.SendDumpByInfodiodReport {
-
-        private String message = "";
-        private List<String> createdFileNames = new ArrayList<>();
-
-        @Override
-        public String getMessage() {
-            return message;
-        }
-
-        @Override
-        public List<String> getCreatedFileNames() {
-            return createdFileNames;
+            return new CreateAndSendToInfodiodResponse(dumpReport, new InfodiodService.InfodiodReport(new InfodiodServiceClient.SendDumpByInfodiodResponse.Empty()));
         }
     }
 

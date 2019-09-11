@@ -1,8 +1,8 @@
 package ru.cbr.turing.dump.oracle;
 
+import ru.cbr.turing.dump.common.Cmd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.cbr.turing.dump.oraexp.Cmd;
 import ru.cbr.turing.dump.oraexp.Config;
 import ru.cbr.turing.dump.oraexp.Exp;
 

@@ -7,7 +7,7 @@ spring:
 server:
   port: 8080
 configuration:
-  version: 1.0-SNAPSHOT
+  version: 1.0-SNAPSHOT-local-docker
   dump:
     clientPath: "/opt/oracle/instantclient_19_3"
     expCmd: "/opt/oracle/instantclient_19_3/exp"
@@ -24,7 +24,7 @@ configuration:
   dump:
     outputPath: "/tmp/turing/odump"
   infodiod:
-    serviceHost: "http://172.17.0.6:8080"
+    serviceHost: "http://172.17.0.9:8080"
 ---
 spring:
   profiles: local-dev

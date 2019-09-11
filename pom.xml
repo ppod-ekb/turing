@@ -14,6 +14,9 @@
         <module>oraexp</module>
         <module>infodiod</module>
         <module>infodiod-client</module>
+        <module>pgdump-lib</module>
+        <module>common-lib</module>
+        <module>pgdump-service</module>
     </modules>
 
     <properties>
@@ -44,8 +47,18 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>ru.cbr.turing.dump.common</groupId>
+                <artifactId>common-lib</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
                 <groupId>ru.cbr.turing.dump.oraexp</groupId>
                 <artifactId>oraexp</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>ru.cbr.turing.dump.pgdump</groupId>
+                <artifactId>pgdump-lib</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
