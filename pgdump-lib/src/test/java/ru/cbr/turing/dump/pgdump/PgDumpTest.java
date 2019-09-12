@@ -4,24 +4,27 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static ru.cbr.turing.dump.pgdump.PgDumpConst.*;
 
+import static ru.cbr.turing.dump.pgdump.PgDump.Config;
+import static ru.cbr.turing.dump.pgdump.PgDump.Config.ConfigBuilder;
+
 public class PgDumpTest {
 
     @Test
     @Disabled
     public void runTest() {
-        PgDump.Config.ConfigBuilder configBuilder = new PgDump.Config.ConfigBuilder();
+        ConfigBuilder configBuilder = new ConfigBuilder();
 
-        configBuilder.cmd(CMD)
+        configBuilder.format(FORMAT)
+                      .cmd(CMD)
                       .dbName(DB_NAME)
                       .dmpFile(OUT_PATH, DMP_FILE)
-                      .format(FORMAT)
                       .host(HOST)
                       .port(PORT)
                       .logFile(OUT_PATH, LOG_FILE)
                       .username(USERNAME)
                       .password(PG_PASSWORD);
 
-        PgDump.Config config = configBuilder.build();
+        Config config = configBuilder.build();
         PgDump pgDump = new PgDump(config);
 
         pgDump.run();

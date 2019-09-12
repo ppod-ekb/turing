@@ -32,11 +32,11 @@ public interface ArgBuilder<T> {
             }
         }
 
-        public void add(String value) {
+        @Override public void add(String value) {
             sb.append(" ").append(value);
         }
 
-        public String args() {
+        @Override public String args() {
             return toString();
         }
 

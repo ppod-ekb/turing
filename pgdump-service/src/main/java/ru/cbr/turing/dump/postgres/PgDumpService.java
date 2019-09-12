@@ -8,39 +8,40 @@ import ru.cbr.turing.dump.pgdump.PgDump;
 @Service
 public class PgDumpService implements DumpService {
 
-    private final Application.Config.Dump config;
+    private final Application.Config.Dump applicationConfig;
 
-    public PgDumpService(@Autowired Application.Config config) {
-        this.config = config.getDump();
+    public PgDumpService(@Autowired Application.Config applicationConfig) {
+        this.applicationConfig = applicationConfig.getDump();
     }
 
     @Override public DumpService.DumpReport createDump(DumpService.DumpRequestBody dumpRequestBody) {
-        PgDump.Config config = new PgDumpConfigFactory(dumpRequestBody).create();
+        PgDump.Config config = new PgDumpConfigBuilder(dumpRequestBody).build();
         DumpCmd pgDump = new PgDump(config);
         DumpCmd.Result result = pgDump.run();
 
         return new DumpService.DumpReport(result, config);
+
     }
 
-    private class PgDumpConfigFactory implements DumpConfigFactory<PgDump.Config> {
+    private class PgDumpConfigBuilder {
 
         private final DumpService.DumpRequestBody dumpRequestBody;
 
-        PgDumpConfigFactory(DumpService.DumpRequestBody dumpRequestBody) {
+        PgDumpConfigBuilder(DumpService.DumpRequestBody dumpRequestBody) {
             this.dumpRequestBody = dumpRequestBody;
         }
 
-        public PgDump.Config create() {
+        public PgDump.Config build() {
             PgDump.Config.ConfigBuilder cb = new PgDump.Config.ConfigBuilder();
             cb.username(dumpRequestBody.getUsername());
             cb.port(dumpRequestBody.getPort());
             cb.password(dumpRequestBody.getPassword());
             cb.host(dumpRequestBody.getHost());
-            cb.logFile(config.getDmpStorageMountPath(), dumpRequestBody.getOrderNum() + config.getLogFileExtension());
-            cb.dmpFile(config.getDmpStorageMountPath(), dumpRequestBody.getOrderNum() + config.getDmpFileExtension());
-            cb.format(config.getDmpFormat());
+            cb.logFile(applicationConfig.getDmpStorageMountPath(), dumpRequestBody.getOrderNum() + applicationConfig.getLogFileExtension());
+            cb.dmpFile(applicationConfig.getDmpStorageMountPath(), dumpRequestBody.getOrderNum() + applicationConfig.getDmpFileExtension());
+            cb.format(applicationConfig.getDmpFormat());
             cb.dbName(dumpRequestBody.getDbName());
-            cb.cmd(config.getPgdumpCmd());
+            cb.cmd(applicationConfig.getPgdumpCmd());
 
             return cb.build();
         }

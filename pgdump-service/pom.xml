@@ -25,6 +25,35 @@
         <docker.internal.port>8080</docker.internal.port>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>local-dev</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>local-dev</value>
+                </property>
+            </activation>
+            <properties>
+                <project.version>${project.version}-local-dev</project.version>
+                <activatedProperties>local-dev</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>local-docker</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>local-docker</value>
+                </property>
+            </activation>
+            <properties>
+                <project.version>${project.version}-local-docker</project.version>
+                <activatedProperties>local-docker</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

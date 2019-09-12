@@ -1,7 +1,0 @@
-ru/cbr/turing/dump/infodiod/client/InfodiodServiceClient$Order.class
-ru/cbr/turing/dump/infodiod/client/InfodiodServiceClient$SendDumpByInfodiodResponse$ErrorSendDumpResponse.class
-ru/cbr/turing/dump/infodiod/client/InfodiodServiceClient$SendDumpByInfodiodResponse$Empty.class
-ru/cbr/turing/dump/infodiod/client/InfodiodServiceClient$SendDumpByInfodiodResponse$DumpSendedResponse.class
-ru/cbr/turing/dump/infodiod/client/InfodiodServiceClient$SendDumpByInfodiodResponse.class
-ru/cbr/turing/dump/infodiod/client/InfodiodServiceClient$DumpCreated.class
-ru/cbr/turing/dump/infodiod/client/InfodiodServiceClient.class

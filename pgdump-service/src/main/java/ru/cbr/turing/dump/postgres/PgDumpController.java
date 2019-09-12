@@ -46,7 +46,7 @@ public class PgDumpController implements DumpController {
         }
     }
 
-    private class PgDumpServiceInfo implements ServiceInfo<Application.Config.Dump, Application.Config.Infodiod> {
+    private class PgDumpServiceInfo implements ServiceInfo {
 
         public String getVersion() {
             return config.getVersion();
